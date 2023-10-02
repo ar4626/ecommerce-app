@@ -98,7 +98,7 @@ const Header = () => {
                       type="button" id="dropdownMenuButton1"
                       data-bs-toggle="dropdown"
                       aria-expanded="false">
-                      <img src='images\menu.svg' />
+                      <img src='images\menu.svg' alt='menu' />
                       <span className='me-5 d-inline-block'>Shop Categories</span>
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -111,7 +111,7 @@ const Header = () => {
                 <div className='menu-links'>
                   <div className='d-flex align-items-center gap-15'>
                     <NavLink to={"/"} >Home</NavLink>
-                    <NavLink to={"/"} >Our Store</NavLink>
+                    <NavLink to={"/store"} >Our Store</NavLink>
                     <NavLink to={"/blog"} >Blogs</NavLink>
                     <NavLink to={"/contact"} >Contact</NavLink>
                   </div>
