@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard'
 import SpecialProduct from '../components/SpecialProduct'
 import Meta from '../components/Meta'
 
- 
+
 const Home = () => {
   return (
     <>
@@ -356,10 +356,18 @@ const Home = () => {
             </h3>
           </div>
           <div className='row'>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            <div className='col-3'>
+              <BlogCard />
+            </div>
+            <div className='col-3'>
+              <BlogCard />
+            </div>
+            <div className='col-3'>
+              <BlogCard />
+            </div>
+            <div className='col-3'>
+              <BlogCard />
+            </div>
           </div>
         </div>
       </section>
