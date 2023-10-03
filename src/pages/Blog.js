@@ -18,7 +18,7 @@ const Blog = () => {
                                 <div>
                                     <ul className='ps-0'>
                                         <li>IT</li>
-                                        <li>Gaming</li>
+                                        <li>Gaming</li> 
                                         <li>Entertainment</li>
                                         <li>Gym</li>
                                         <li>Medicine</li>
