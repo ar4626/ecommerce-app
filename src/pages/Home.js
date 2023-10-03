@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom'
 import BlogCard from '../components/BlogCard'
 import ProductCard from '../components/ProductCard'
 import SpecialProduct from '../components/SpecialProduct'
+import Meta from '../components/Meta'
 
+ 
 const Home = () => {
   return (
     <>
+      <Meta title='E-Commerce App' />
       <section className='home-wrapper-1 py-5'>
         <div className='container-xxl'>
           <div className='row'>
@@ -262,7 +265,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className='col-3'> 
+            <div className='col-3'>
               <div className='famous-card position-relative'>
                 <img src='images\famous-4.png' className='img-fluid' alt='' />
                 <div className='famous-content position-absolute'>

@@ -10,6 +10,7 @@
   --color-febd69: #febd69;
   --color-232f3e: #232f3e;
   --color-bf4800: #bf4800;
+  --color-f2f2f2: #f2f2f2;
   --color-f5f5f7: #f5f5f7;
   --color-ededed: #ededed;
   --color-777777: #777777;
@@ -318,6 +319,7 @@ footer .input-group-text {
   background-color: white;
   border-radius: 10px;
   overflow: hidden;
+  width: 100%;
 }
 
 .product-card .product-images {
@@ -362,6 +364,12 @@ footer .input-group-text {
 .product-card .product-details p.price {
   font-size: 16px;
   color: var(--color-1c1c1b);
+}
+
+.product-card p.description{
+  font-size: 13px;
+  color: var(--color-777777);
+  margin-right: 20px;
 }
 
 .action-bar {
@@ -421,6 +429,142 @@ footer .input-group-text {
 }
 
 /* famous Card ends */
+
+
+
+/* Our Store */
+
+.filter-card{
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px 25px;
+}
+
+.filter-title{
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--color-1c1c1b);
+  margin-bottom: 20px;
+}
+
+.filter-card ul,
+.filter-card .form-check-label
+{
+  list-style-type: none;
+  font-size: 13px;
+  line-height: 30px;
+  color: var(--color-777777);
+  cursor: pointer;
+}
+
+.filter-card .form-check-input:focus{
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, .25);
+}
+
+.filter-card .form-check-input:checked{
+  background-color: var(--color-febd69);
+  border-color: var(--color-febd69);
+}
+
+.sub-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-1c1c1b);
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+.colors{
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 0;
+}
+
+.colors li{
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  border-radius: 50%;
+  
+}
+
+.random-products h5{
+  font-size:14px ;
+  margin-bottom: 8px;
+}
+
+.random-products:first-child{
+  border-bottom: 1px solid var(--color-ededed);
+}
+
+.filter-sort-grid{
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.grid img{
+  height: 35px;
+  width: 35px;
+  background-color: var(--color-f2f2f2);
+  padding: 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.gr-12{
+  width:100%
+}
+.gr-6{
+  width:49%
+}
+.gr-4{
+  width:32%
+}
+.gr-3{
+  width:24%
+}
+
+.gr-12 .product-card{
+  display: flex;
+  gap: 20px;
+}
+
+.gr-6 .product-images{
+  width: 100%;
+}
+
+.gr-6 .product-images img{
+  margin: auto;
+  display: block;
+}
+
+.gr-12 .product-card .product-images{
+  width:270px
+}
+
+.gr-12 .product-card .product-images{
+  height: auto;
+}
+
+.gr-12 .action-bar{
+  top: 17%;
+}
+
+/* Our Store Ends */
+
+
+
+
+
+
+
+
+
 
 
 
