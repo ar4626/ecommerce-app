@@ -1,11 +1,11 @@
 import React from 'react'
-import Meta from '../components/Meta'
 import { Link } from 'react-router-dom'
-import { IoIosArrowBack } from 'react-icons/io'
+import Meta from '../components/Meta'
 import watch from '../images/watch.jpg'
+import { IoIosArrowBack } from 'react-icons/io'
 import Container from '../components/Container'
 
-const Checkout = () => {
+const Shipping = () => {
     return (
         <>
             <Meta title='Checkout' />
@@ -23,10 +23,12 @@ const Checkout = () => {
                                             Cart
                                         </Link>
                                     </li>
-                                    <li className="breadcrumb-item active" aria-current="page">
-                                        Information
+                                    <li className="breadcrumb-item " aria-current="page">
+                                        <Link to="/cart" style={{ "color": "#212529" }}>
+                                            Information
+                                        </Link>
                                     </li>
-                                    <li className="breadcrumb-item" aria-current="page">
+                                    <li className="breadcrumb-item active" aria-current="page">
                                         Shipping
                                     </li>
                                     <li className="breadcrumb-item" aria-current="page">
@@ -34,50 +36,14 @@ const Checkout = () => {
                                     </li>
                                 </ol>
                             </nav>
-                            <h4 className='title total'>
-                                Contact Information
-                            </h4>
-                            <p className='user-details total'>Ankit Raj (ankitrak832@gamil.com)</p>
-                            <h4 className='mb-3'>Shipping Address</h4>
+
                             <form action='' className='d-flex gap-15 flex-wrap justify-content-between'>
                                 <div className='w-100'>
-                                    <select name='' className='form-control form-select' id=''>
-                                        <option value=" " selected disabled>Select Country</option>
-                                    </select>
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='First Name' type='text' />
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='Last Name' type='text' />
-                                </div>
-                                <div className='w-100'>
-                                    <input className='form-control ' placeholder='Address' type='text' />
-                                </div>
-                                <div className='w-100'>
-                                    <input className='form-control ' placeholder='Apartment, Suite etc' type='text' />
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='City' type='text' />
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <select
-                                        name=''
-                                        className='form-control form-select'
-                                        id=''
-                                    >
-                                        <option value=" " selected disabled>Select State</option>
-                                    </select>
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='PinCode' type='text' />
-                                </div>
-                                <div className='w-100'>
                                     <div className='d-flex justify-content-between align-items-center'>
-                                        <Link to="/cart" className='text-dark'>
+                                        <Link to="/checkout" className='text-dark'>
                                             <IoIosArrowBack className='me-2' /> Return To Cart
                                         </Link>
-                                        <Link to="/shipping" className='button'>Continue to Shipping</Link>
+                                        <Link to="/payment" className='button'>Continue to Payment</Link>
                                     </div>
                                 </div>
                             </form>
@@ -130,4 +96,4 @@ const Checkout = () => {
     )
 }
 
-export default Checkout
+export default Shipping
