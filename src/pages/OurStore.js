@@ -11,7 +11,7 @@ import Container from '../components/Container';
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4);
-  // alert(grid);
+  // console.log(grid);
   return (
     <>
       <Meta title='Our Store' />
@@ -153,8 +153,8 @@ const OurStore = () => {
                   <p className='mb-0 d-block' style={{ "width": "100px" }}>
                     Sort By:
                   </p>
-                  <select className='form-control form-select' name="" id="">
-                    <option value="manual">Featured </option>
+                  <select className='form-control form-select' name="" id="" defaultValue={"manual"}>
+                    <option value="manual" disabled>Featured </option>
                     <option value="best-selling">Best Selling</option>
                     <option value="title-ascending"> Alphabetically, A-Z</option>
                     <option value="title-descending">Alphabetically, Z-A</option>
