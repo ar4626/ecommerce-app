@@ -24,7 +24,7 @@ import Shipping from './pages/Shipping';
 
 function App() {
   return (
-    <>
+    <> 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
