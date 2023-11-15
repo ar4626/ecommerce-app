@@ -28,8 +28,8 @@ const SingleProduct = () => {
     const [orderedProduct, setorderedProduct] = useState(false);
     return (
         <>
-            <Meta title='Reset Password' />
-            <BreadCrumb title='Reset Password' />
+            <Meta title='Single Product' />
+            <BreadCrumb title='Single Product' />
             <Container class1='main-product-wrapper home-wrapper-2 py-5 '>
                 <div className='row'>
                     <div className='col-6'>
