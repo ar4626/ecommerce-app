@@ -1,18 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
 
-const BlogCard = () => {
+
+const BlogCard = (props) => {
+    const { id, title, description,image, date } = props;
+    const dispatch = useDispatch();
+
     return (
-
         <div className='blog-card'>
             <div className='card-image'>
-                <img src='images\blog-1.jpg' className='img-fluid w-100' alt='' />
+                <img src={image} className='img-fluid w-100' alt='' />
             </div>
             <div className='blog-content'>
-                <p className='date'>11 JUNE, 2022</p>
-                <h5 className='title'>A Beautiful Sunday Morning Renaissance</h5>
-                <p className='description'>You are Only As Good as your collection, which is an enormous pressure. I think ther is something about</p>
-                <Link to="/blog/:id" className='button'>
+                <p className='date'>{date}</p>
+                <h5 className='title'>{title}</h5>
+                <p className='description' dangerouslySetInnerHTML={{ __html:description?.substr(0,20) + ".........." }}></p>
+                <Link to={`/blog/${id}`} className='button'>
                     Read More
                 </Link>
             </div>

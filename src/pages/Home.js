@@ -7,9 +7,21 @@ import SpecialProduct from '../components/SpecialProduct'
 import Meta from '../components/Meta'
 import Container from '../components/Container'
 import { services } from '../utils/Data'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import moment from 'moment';
+import { getAllBlogs } from '../features/blogs/blogSlice'
 
 const Home = () => {
+  const blogState = useSelector((state) => state?.blog?.blog)
+    console.log(blogState)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        getBlogs();
+    }, [])
+    const getBlogs = () => {
+        const result = dispatch(getAllBlogs());
+    }
   return (
     <>
       <Meta title='E-Commerce App' />
@@ -303,18 +315,23 @@ const Home = () => {
           </h3>
         </div>
         <div className='row'>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
+          {
+            Array.isArray(blogState) && blogState?.map((item, index) => {
+              if(index<3){
+                return (
+                  <div className='col-3 ' key={index}>
+                    <BlogCard
+                      id={item?._id}
+                      title={item?.title}
+                      description={item?.description}
+                      image={item?.images[0]?.url}
+                      date={moment(item?.createdAt).format("MMM Do YYYY, h:mm a")}
+                    />
+                  </div>
+                )
+              }
+            })
+          }
         </div>
       </Container>
     </>
