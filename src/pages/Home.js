@@ -121,7 +121,7 @@ const Home = () => {
               {
                 services.map((i, j) => {
                   return (
-                    <div className='d-flex align-items-center gap-15'>
+                    <div key={j} className='d-flex align-items-center gap-15'>
                       <img src={i.image} alt='services' />
                       <div>
                         <h6>

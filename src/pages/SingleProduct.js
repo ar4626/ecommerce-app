@@ -5,14 +5,29 @@ import ProductCard from '../components/ProductCard'
 import Color from '../components/Color'
 import ReactStars from "react-rating-stars-component";
 import ReactImageZoom from 'react-image-zoom';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { TbGitCompare } from 'react-icons/tb'
 import { AiOutlineHeart } from 'react-icons/ai'
 import Container from '../components/Container'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getAProduct } from '../features/products/productSlice'
 
 
 
 const SingleProduct = () => {
+
+    const location = useLocation();
+    const getProductId = location.pathname.split('/')[2];
+    // console.log(getProductId);
+    const dispatch = useDispatch();
+    const productState = useSelector(state => state.product.singleproduct)
+    console.log(productState)
+    useEffect(() => {
+        dispatch(getAProduct(getProductId))
+    }, [])
+
+
     const copyToClipboard = (text) => {
         console.log('text', text)
         var textField = document.createElement('textarea')
@@ -23,7 +38,7 @@ const SingleProduct = () => {
         textField.remove()
     }
 
-    const props = { width: 600, height: 500, zoomWidth: 500, img: "https://monochrome-watches.com/wp-content/uploads/2022/10/Jacob-Co-Opera-Godfather-50th-Anniversary-Edition-9.jpg" };
+    const props = { width: 590, height: 200, zoomWidth: 500, img: productState?.images[0]?.url };
 
     const [orderedProduct, setorderedProduct] = useState(false);
     return (
@@ -39,33 +54,35 @@ const SingleProduct = () => {
                             </div>
                         </div>
                         <div className='other-product-image d-flex flex-wrap gap-15'>
-                            <div>
-                                <img src='https://monochrome-watches.com/wp-content/uploads/2022/10/Jacob-Co-Opera-Godfather-50th-Anniversary-Edition-9.jpg' alt='watch' className='img-fluid' />
-                            </div>
-                            <div>
-                                <img src='https://monochrome-watches.com/wp-content/uploads/2022/10/Jacob-Co-Opera-Godfather-50th-Anniversary-Edition-9.jpg' alt='watch' className='img-fluid' />
-                            </div>
-                            <div>
-                                <img src='https://monochrome-watches.com/wp-content/uploads/2022/10/Jacob-Co-Opera-Godfather-50th-Anniversary-Edition-9.jpg' alt='watch' className='img-fluid' />
-                            </div>
-                            <div>
-                                <img src='https://monochrome-watches.com/wp-content/uploads/2022/10/Jacob-Co-Opera-Godfather-50th-Anniversary-Edition-9.jpg' alt='watch' className='img-fluid' />
-                            </div>
+                            {
+                                productState?.images.map((item, index) => {
+                                    return (
+                                        <div style={{ width: '210px', height: '140px', overflow:'hidden' }}>
+                                            <img 
+                                            src={item?.url} 
+                                            alt='watch' 
+                                            className='img-fluid'
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                             />
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                     <div className='col-6'>
                         <div className='main-product-details'>
                             <div className='border-bottom'>
-                                <h3 className='title'>Mens Watch Stainless Steel Analog Watch Titanium cut</h3>
+                                <h3 className='title'>{productState?.title}</h3>
                             </div>
                             <div className='border-bottom py-3'>
-                                <p className='price'>$100</p>
+                                <p className='price'>${productState?.price}</p>
                                 <div className='d-flex align-items-center gap-10'>
                                     <ReactStars
                                         count={5}
                                         size={24}
                                         activeColor="#ffd700"
-                                        value={3}
+                                        value={Number(productState?.totalratings)}
                                         edit={false}
                                     />
                                     <p className='mb-0 t-review' >(2 reviews)</p>
@@ -79,19 +96,19 @@ const SingleProduct = () => {
                                 </div>
                                 <div className='d-flex gap-10 align-items-center my-2'>
                                     <h3 className='product-heading'>Brand :</h3>
-                                    <p className='product-data'>Titan</p>
+                                    <p className='product-data'>{productState?.brand}</p>
                                 </div>
                                 <div className='d-flex gap-10 align-items-center my-2'>
                                     <h3 className='product-heading'>Category :</h3>
-                                    <p className='product-data'>Watch</p>
+                                    <p className='product-data'>{productState?.category}</p>
                                 </div>
                                 <div className='d-flex gap-10 align-items-center my-2'>
                                     <h3 className='product-heading'>Tags :</h3>
-                                    <p className='product-data'>watch </p>
+                                    <p className='product-data'>{productState?.tags} </p>
                                 </div>
                                 <div className='d-flex gap-10 align-items-center my-2'>
                                     <h3 className='product-heading'>Availability :</h3>
-                                    <p className='product-data'>In Stocks</p>
+                                    <p className='product-data'>{productState?.quantity > 0 ? "In Stocks" : "Stock Out"}</p>
                                 </div>
                                 <div className='d-flex gap-10 flex-column mt-2 mb-3'>
                                     <h3 className='product-heading'>Size :</h3>
@@ -140,7 +157,7 @@ const SingleProduct = () => {
                                 <div className='d-flex gap-10 align-items-center my-3'>
                                     <h3 className='product-heading'>Copy Product Link :</h3>
                                     <a href='javascript:void(0);' onClick={() => {
-                                        copyToClipboard("https://monochrome-watches.com/wp-content/uploads/2022/10/Jacob-Co-Opera-Godfather-50th-Anniversary-Edition-9.jpg")
+                                        copyToClipboard(window.location.href)
                                     }}>
                                         Copy product Link
                                     </a>
@@ -155,11 +172,7 @@ const SingleProduct = () => {
                     <div className='col-12'>
                         <h4>Description</h4>
                         <div className='bg-white p-3'>
-                            <p>
-                                lorem ipsum dolor sit amet, consectetur adip nonum soc tempor
-                                lorem ipsum dolor sit amet, consectetur adip nonum soc tempor
-                                lorem ipsum dolor sit amet, consectetur adip nonum soc tempor
-                            </p>
+                            <p dangerouslySetInnerHTML={{ __html: productState?.description }}></p>
                         </div>
                     </div>
                 </div>
