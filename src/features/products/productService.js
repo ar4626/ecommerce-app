@@ -14,7 +14,7 @@ const addToWishlist = async (prodId) => {
         return response.data;
     }
 }
-
+ 
 
 export const productService = {
     getProducts,

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import prodcompare from "../images/prodcompare.svg"
 import wish from "../images/wish.svg"
 import wishlist from "../images/wishlist.svg"
@@ -14,6 +14,7 @@ import { addToWishlist } from '../features/products/productSlice';
 
 const ProductCard = (props) => {
     const { grid, data } = props;
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     // console.log(grid);
     console.log(data);
@@ -32,8 +33,8 @@ const ProductCard = (props) => {
                            
                             className={` ${location.pathname === "/product" ? `gr-${grid}` : "col-3"} `}
                         >
-                            <Link
-                                to={`${location.pathname === '/' || location.pathname === '/product/:id' ? '/product/:id' : ':id'}`}
+                            <div
+                                // to={`${location.pathname === '/' || location.pathname === '/product/:id' ? '/product/:id' : ':id'}`}
                                 className='product-card position-relative'
                             >
                                 <div className='wishlist-icon position-absolute'>
@@ -83,15 +84,15 @@ const ProductCard = (props) => {
                                         <button className='border-0 bg-transparent'>
                                             <img src={prodcompare} alt='compare' />
                                         </button>
-                                        <button className='border-0 bg-transparent'>
+                                        <Link to={`/product/${item?._id}`} className='border-0 bg-transparent'>
                                             <img src={view} alt='view' />
-                                        </button>
+                                        </Link >
                                         <button className='border-0 bg-transparent'>
                                             <img src={addcart} alt='addcart' />
                                         </button>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
                     )
                 })

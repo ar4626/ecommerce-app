@@ -22,7 +22,7 @@ export const addToWishlist = createAsyncThunk("product/wishlist", async(prodId,t
 const productState = {
     product:"",
     isError: false, 
-    isSuccess: false,
+    isSuccess: false, 
     isLoading: false,
     message:"",
 }
