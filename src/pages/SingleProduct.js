@@ -57,7 +57,7 @@ const SingleProduct = () => {
                             {
                                 productState?.images.map((item, index) => {
                                     return (
-                                        <div style={{ width: '210px', height: '140px', overflow:'hidden' }}>
+                                        <div key={index} style={{ width: '210px', height: '140px', overflow:'hidden' }}>
                                             <img 
                                             src={item?.url} 
                                             alt='watch' 
