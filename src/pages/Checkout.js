@@ -1,11 +1,65 @@
 import React from 'react'
 import Meta from '../components/Meta'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
 import watch from '../images/watch.jpg'
 import Container from '../components/Container'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+const shippingSchema = yup.object({
+    firstname: yup.string().required("*First Name is required"),
+    lastname: yup.string().required("*Last Name is required"),
+    mobile: yup.string().required("*Mobile No. is required"),
+    address: yup.string().required("*Address Details is required"),
+    state: yup.string().required("*State is required"),
+    city: yup.string().required("*City is required"),
+    country: yup.string().required("*country is required"),
+    pincode: yup.string().required("*Pincode is required"),
+    landmark: yup.string().required("*Landmark is required"),
+
+});
 
 const Checkout = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const cartState = useSelector(state => state.auth.cartProducts)
+    // console.log(cartState)
+    const [totalAmount, setTotalAmount] = useState(null)
+    const [shippingInfo, setShippingInfo] = useState(null)
+
+
+    useEffect(() => {
+        let subtotal = 0;
+        for (let i = 0; i < cartState?.length; i++) {
+            subtotal += (cartState[i].price * cartState[i].quantity);
+            setTotalAmount(subtotal)
+        }
+    }, [cartState])
+
+    const formik = useFormik({
+        initialValues: {
+            firstname: '',
+            lastname: '',
+            address: '',
+            city: '',
+            country: '',
+            mobile: '',
+            state: '',
+            pincode: '',
+            landmark: '',
+        },
+        validationSchema: shippingSchema,
+        onSubmit: (values) => {
+            // alert(JSON.stringify(values));
+            setShippingInfo(values);
+            // navigate('/shipping',{shippingInfo});
+        },
+    });
+
     return (
         <>
             <Meta title='Checkout' />
@@ -39,45 +93,144 @@ const Checkout = () => {
                             </h4>
                             <p className='user-details total'>Ankit Raj (ankitrak832@gamil.com)</p>
                             <h4 className='mb-3'>Shipping Address</h4>
-                            <form action='' className='d-flex gap-15 flex-wrap justify-content-between'>
+                            <form action='' onSubmit={formik.handleSubmit} className='d-flex gap-15 flex-wrap justify-content-between'>
                                 <div className='w-100'>
-                                    <select name='' className='form-control form-select' id=''>
-                                        <option value=" " selected disabled>Select Country</option>
-                                    </select>
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='First Name' type='text' />
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='Last Name' type='text' />
-                                </div>
-                                <div className='w-100'>
-                                    <input className='form-control ' placeholder='Address' type='text' />
-                                </div>
-                                <div className='w-100'>
-                                    <input className='form-control ' placeholder='Apartment, Suite etc' type='text' />
-                                </div>
-                                <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='City' type='text' />
-                                </div>
-                                <div className='flex-grow-1'>
                                     <select
-                                        name=''
-                                        className='form-control form-select'
-                                        id=''
+                                        name='country'
+                                        onChange={formik.handleChange("country")}
+                                        onBlur={formik.handleBlur("country")}
+                                        value={formik.values.country}
+                                        className='form-control form-select' id=''
                                     >
-                                        <option value=" " selected disabled>Select State</option>
+                                        <option value="" selected disabled>Select Country</option>
+                                        <option value="India"  > India</option>
+                                        <option value="Srilanka"  >Srilanka</option>
+                                        <option value="UK"  >UK</option>
                                     </select>
+                                    <div className='error'>
+                                        {formik.touched.country && formik.errors.country}
+                                    </div>
                                 </div>
                                 <div className='flex-grow-1'>
-                                    <input className='form-control ' placeholder='PinCode' type='text' />
+                                    <input
+                                        className='form-control '
+                                        placeholder='First Name'
+                                        type='text'
+                                        name='firstname'
+                                        onChange={formik.handleChange("firstname")}
+                                        onBlur={formik.handleBlur("firstname")}
+                                        value={formik.values.firstname}
+                                    />
+                                    <div className='error'>
+                                        {formik.touched.firstname && formik.errors.firstname}
+                                    </div>
+                                </div>
+                                <div className='flex-grow-1'>
+                                    <input
+                                        className='form-control '
+                                        placeholder='Last Name'
+                                        type='text'
+                                        name='lastname'
+                                        onChange={formik.handleChange("lastname")}
+                                        onBlur={formik.handleBlur("lastname")}
+                                        value={formik.values.lastname}
+                                    />
+                                    <div className='error'>
+                                        {formik.touched.lastname && formik.errors.lastname}
+                                    </div>
+                                </div>
+                                <div className='w-100'>
+                                    <input
+                                        className='form-control '
+                                        placeholder='Address'
+                                        type='text'
+                                        name='address'
+                                        onChange={formik.handleChange("address")}
+                                        onBlur={formik.handleBlur("address")}
+                                        value={formik.values.address}
+                                    />
+                                    <div className='error'>
+                                        {formik.touched.address && formik.errors.address}
+                                    </div>
+                                </div>
+                                <div className='w-100'>
+                                    <input
+                                        className='form-control '
+                                        placeholder='Landmark'
+                                        type='text'
+                                        name='landmark'
+                                        onChange={formik.handleChange("landmark")}
+                                        onBlur={formik.handleBlur("landmark")}
+                                        value={formik.values.landmark}
+                                    />
+                                    <div className='error'>
+                                        {formik.touched.landmark && formik.errors.landmark}
+                                    </div>
+                                </div>
+                                <div className='flex-grow-1'>
+                                    <input
+                                        className='form-control '
+                                        placeholder='City'
+                                        type='text'
+                                        name='city'
+                                        onChange={formik.handleChange("city")}
+                                        onBlur={formik.handleBlur("city")}
+                                        value={formik.values.city}
+                                    />
+                                    <div className='error'>
+                                        {formik.touched.city && formik.errors.city}
+                                    </div>
+                                </div>
+                                <div className='flex-grow-1 '>
+                                    <select
+                                        className='form-control form-select '
+                                        id=''
+                                        name='state'
+                                        onChange={formik.handleChange("state")}
+                                        onBlur={formik.handleBlur("state")}
+                                        value={formik.values.state}
+                                    >
+                                        <option value="" selected disabled>Select State</option>
+                                        <option value="ranchi"  >Ranchi</option>
+                                    </select>
+                                    <div className='error'>
+                                        {formik.touched.state && formik.errors.state}
+                                    </div>
+                                </div>
+                                <div className='flex-grow-1'>
+                                    <input
+                                        className='form-control '
+                                        placeholder='PinCode'
+                                        type='text'
+                                        name='pincode'
+                                        onChange={formik.handleChange("pincode")}
+                                        onBlur={formik.handleBlur("pincode")}
+                                        value={formik.values.pincode}
+                                    />
+                                    <div className='error'>
+                                        {formik.touched.pincode && formik.errors.pincode}
+                                    </div>
+                                </div>
+                                <div className='flex-grow-1'>
+                                    <input
+                                        className='form-control '
+                                        placeholder='Mobile No.'
+                                        type='text'
+                                        name='mobile'
+                                        onChange={formik.handleChange("mobile")}
+                                        onBlur={formik.handleBlur("mobile")}
+                                        value={formik.values.mobile}
+                                    />
+                                    <div className='error'>
+                                        {formik.touched.mobile && formik.errors.mobile}
+                                    </div>
                                 </div>
                                 <div className='w-100'>
                                     <div className='d-flex justify-content-between align-items-center'>
                                         <Link to="/cart" className='text-dark'>
                                             <IoIosArrowBack className='me-2' /> Return To Cart
                                         </Link>
-                                        <Link to="/shipping" className='button'>Continue to Shipping</Link>
+                                        <button  className='button'>Continue to Shipping</button>
                                     </div>
                                 </div>
                             </form>
@@ -85,43 +238,53 @@ const Checkout = () => {
                     </div>
                     <div className="col-5">
                         <div className='border-bottom py-4'>
-                            <div className='d-flex gap-10 mb-2 align-items-center'>
-                                <div className='w-75 d-flex gap-10'>
-                                    <div className='w-25 position-relative'>
-                                        <span className='badge bg-secondary text-white rounded-circle p-2 position-absolute' style={{ "top": "-10px", "right": "2px" }}>
-                                            1
-                                        </span>
-                                        <img src={watch} alt='product' className='img-fluid' />
-                                    </div>
-                                    <div>
-                                        <h5 className='total-price'>
-                                            Redmi watch pro AmoLED Display
-                                        </h5>
-                                        <p className='total-price'>
-                                            <span id='product-size'>S</span>
-                                            /
-                                            <span id='product-color'>#777777</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='flex-grow-1 '>
-                                    <h5 className='total'>$ 100</h5>
-                                </div>
-                            </div>
+                            {
+                                cartState && cartState?.map((item, index) => {
+                                    return (
+                                        <div key={index} className='d-flex gap-10 mb-3 align-items-center'>
+                                            <div className='w-75 d-flex gap-10'>
+                                                <div className='w-25 position-relative'>
+                                                    <span className='badge bg-secondary text-white rounded-circle p-2 position-absolute' style={{ "top": "-10px", "right": "2px" }}>
+                                                        {item?.quantity}
+                                                    </span>
+                                                    <img
+                                                        src={item?.productId?.images[0]?.url ? item?.productId?.images[0]?.url : watch}
+                                                        alt='product'
+                                                        height={90}
+                                                        width={90}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h5 className='total-price'>
+                                                        {item?.productId?.title}
+                                                    </h5>
+                                                    <p className='total-price'>
+                                                        {item?.color?.title}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className='flex-grow-1 '>
+                                                <h5 className='total'> ₹ {item?.quantity * item?.price}</h5>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+
                         </div>
                         <div className='border-bottom py-4'>
                             <div className='d-flex justify-content-between align-items-center'>
                                 <p className='total'>Sub Total</p>
-                                <p className='total-price'>$ 200</p>
+                                <p className='total-price'> ₹ {totalAmount ? totalAmount : 0}</p>
                             </div>
                             <div className='d-flex justify-content-between align-items-center'>
                                 <p className='mb-0 total'>Shipping</p>
-                                <p className='mb-0 total-price'>$ 12.23</p>
+                                <p className='mb-0 total-price'> ₹ 50</p>
                             </div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center border-bottom py-4'>
                             <h4 className='total'>Total</h4>
-                            <h5 className='total-price'>$ 10000</h5>
+                            <h5 className='total-price'> ₹ {totalAmount ? totalAmount + 50 : 0}</h5>
                         </div>
                     </div>
                 </div>

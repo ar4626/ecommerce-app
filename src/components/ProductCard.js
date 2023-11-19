@@ -77,7 +77,7 @@ const ProductCard = (props) => {
                                     >
 
                                     </p>
-                                    <p className='price'>${item?.price}</p>
+                                    <p className='price'> ₹{item?.price}</p>
                                 </div>
                                 <div className='action-bar position-absolute'>
                                     <div className='d-flex flex-column gap-15'>

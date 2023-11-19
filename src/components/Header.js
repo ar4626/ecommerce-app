@@ -28,7 +28,7 @@ const Header = () => {
           <div className='row'>
             <div className='col-6'>
               <p className='text-white mb-0'>
-                Free Shipping Over $500 & Free Returns
+                Free Shipping Over  ₹500 & Free Returns
               </p>
             </div>
             <div className='col-6'>
@@ -94,7 +94,7 @@ const Header = () => {
                     <img src='images\cart.svg' alt='cart' />
                     <div className='d-flex flex-column gap-10'>
                       <span className='badge bg-white text-dark'>{totalQuantity ? totalQuantity : 0}</span>
-                      <p className='mb-0'>${total ? total : 0}</p>
+                      <p className='mb-0'> ₹{total ? total : 0}</p>
                     </div>
                   </Link>
                 </div>

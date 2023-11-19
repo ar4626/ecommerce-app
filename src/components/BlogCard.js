@@ -16,7 +16,7 @@ const BlogCard = (props) => {
                 <p className='date'>{date}</p>
                 <h5 className='title'>{title}</h5>
                 <p className='description' dangerouslySetInnerHTML={{ __html:description?.substr(0,20) + ".........." }}></p>
-                <Link to={`/blog/${id}`} className='button'>
+                <Link to={`/blog/ ₹{id}`} className='button'>
                     Read More
                 </Link>
             </div>

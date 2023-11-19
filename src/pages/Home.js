@@ -55,7 +55,7 @@ const Home = () => {
               <div className='main-banner-content position-absolute'>
                 <h4>SUPERCHARGED FOR PROS.</h4>
                 <h5>iPad S13+ Pro.</h5>
-                <p>From $999.00 ir $$41.62/mo.</p>
+                <p>From  ₹999.00 ir  ₹ ₹41.62/mo.</p>
                 <Link className='button'>BUY NOW</Link>
               </div>
             </div>
@@ -71,7 +71,7 @@ const Home = () => {
                 <div className='small-banner-content position-absolute'>
                   <h4>Best Sale</h4>
                   <h5>Laptops Max</h5>
-                  <p>From $1699.00 0r <br /> $64.62/mo.</p>
+                  <p>From  ₹1699.00 0r <br />  ₹64.62/mo.</p>
                 </div>
               </div>
               <div className='small-banner position-relative '>
@@ -95,7 +95,7 @@ const Home = () => {
                 <div className='small-banner-content position-absolute'>
                   <h4>New Arrival</h4>
                   <h5>Buy IPad Air</h5>
-                  <p>From $99.00 or <br /> $49.91/mo for 12mo.*</p>
+                  <p>From  ₹99.00 or <br />  ₹49.91/mo for 12mo.*</p>
                 </div>
               </div>
               <div className='small-banner position-relative '>
@@ -256,7 +256,7 @@ const Home = () => {
                           value={Number(item?.totalratings)}
                           edit={false}
                         />
-                        <p className='price'>${item?.price}</p>
+                        <p className='price'> ₹{item?.price}</p>
                       </div>
                       <div className='action-bar position-absolute'>
                         <div className='d-flex flex-column gap-15'>
@@ -264,7 +264,7 @@ const Home = () => {
                             <img src={prodcompare} alt='compare' />
                           </button>
                           <button className='border-0 bg-transparent'>
-                            <img onClick={()=>navigate(`/product/${item?._id}`)} src={view} alt='view' />
+                            <img onClick={()=>navigate(`/product/ ₹{item?._id}`)} src={view} alt='view' />
                           </button>
                           <button className='border-0 bg-transparent'>
                             <img src={addcart} alt='addcart' />
@@ -288,7 +288,7 @@ const Home = () => {
               <div className='famous-content position-absolute text-white'>
                 <h5>Big Screen</h5>
                 <h6>Smart Watch Series 7</h6>
-                <p>From $399 or $16.62/mo. for 24 mo.* </p>
+                <p>From  ₹399 or  ₹16.62/mo. for 24 mo.* </p>
               </div>
             </div>
           </div>
@@ -308,7 +308,7 @@ const Home = () => {
               <div className='famous-content position-absolute'>
                 <h5>Smart Phones</h5>
                 <h6>IPhone 13 Pro. </h6>
-                <p>Now in Green. From &999.00 or $41.62/mo. for 24 mo.</p>
+                <p>Now in Green. From &999.00 or  ₹41.62/mo. for 24 mo.</p>
               </div>
             </div>
           </div>
@@ -318,7 +318,7 @@ const Home = () => {
               <div className='famous-content position-absolute'>
                 <h5>Home Speakers</h5>
                 <h6>Room-filling Sound. </h6>
-                <p>From $699 or $116.588/mo. for 12 mo.*</p>
+                <p>From  ₹699 or  ₹116.588/mo. for 12 mo.*</p>
               </div>
             </div>
           </div>
@@ -408,7 +408,7 @@ const Home = () => {
                           value={Number(item?.totalratings)}
                           edit={false}
                         />
-                        <p className='price'>${item?.price}</p>
+                        <p className='price'> ₹{item?.price}</p>
                       </div>
                       <div className='action-bar position-absolute'>
                         <div className='d-flex flex-column gap-15'>
