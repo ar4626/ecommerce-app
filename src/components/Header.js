@@ -9,18 +9,20 @@ import { useState } from 'react'
 const Header = () => {
   const dispatch = useDispatch();
   const cartState = useSelector(state => state?.auth?.cartProducts)
+  const authState = useSelector(state => state?.auth)
+
   const [total, setTotal] = useState(null)
   const [totalQuantity, setTotalQuantity] = useState(null)
   useEffect(() => {
     let sum = 0;
-    let totalQuantity=0;
+    let totalQuantity = 0;
     for (let i = 0; i < cartState?.length; i++) {
       sum = sum + (Number(cartState[i]?.quantity) * Number(cartState[i]?.price))
       totalQuantity = totalQuantity + Number(cartState[i]?.quantity)
       setTotal(sum);
       setTotalQuantity(totalQuantity)
     }
-  },[cartState])
+  }, [cartState])
   return (
     <>
       <header className='header-top-strip py-3'>
@@ -82,11 +84,18 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to='/login' className='d-flex align-items-center gap-10 text-white'>
+                  <Link to={authState?.user === null ? '/login' : " " }
+                  className='d-flex align-items-center gap-10 text-white'
+                  >
                     <img src='images\user.svg' alt='user' />
-                    <p className='mb-0'>
-                      Login <br /> My Account
-                    </p>
+                    {
+                      authState?.user === null ? <p className='mb-0'>
+                        Login <br /> My Account
+                      </p> :
+                        <p className='mb-0'>
+                          Welcome <br /> {authState?.user?.firstname.toUpperCase()}
+                        </p>
+                    }
                   </Link>
                 </div>
                 <div>

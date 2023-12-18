@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authService } from "./userService";
 import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const registerUser = createAsyncThunk("auth/register", async(userData, thunkAPI)=>{
@@ -54,7 +55,15 @@ export const removeProductFromCart = createAsyncThunk("user/cart/product/delete"
 export const updateProductFromCart = createAsyncThunk("user/cart/product/update", async(cartDetail, thunkAPI)=>{
     try{
         return authService.updateProductCart(cartDetail);
-    }catch(err){
+    }catch(err){ 
+        return thunkAPI.rejectWithValue(err);
+    }
+})
+
+export const createAnOrder = createAsyncThunk("user/cart/createOrder", async(orderDetail, thunkAPI)=>{
+    try{
+        return authService.createOrder(orderDetail);
+    }catch(err){ 
         return thunkAPI.rejectWithValue(err);
     }
 })
@@ -82,7 +91,7 @@ export const authSlice = createSlice({
         .addCase(registerUser.fulfilled,(state,action)=>{
             state.isLoading = false;
             state.isError = false;
-            state.isSuccess =true;
+            state.isSuccess =true; 
             state.createdUser = action.payload;
             if(state.isSuccess===true){
                 toast.info("User registered Successfully");
@@ -115,8 +124,9 @@ export const authSlice = createSlice({
             state.isError = true;
             state.isSuccess =false;
             state.message = action.error;
-            if(state.isError===true){
-                toast.info(action.error);
+            if(state.isError){
+                toast.error("Invalid Credentials");
+                // toast.error(state.message);
             }
         })
         .addCase(getUserProductWishlist.pending,(state)=>{
@@ -201,6 +211,27 @@ export const authSlice = createSlice({
             }
         })
         .addCase(updateProductFromCart.rejected,(state,action)=>{
+            state.isLoading = false;
+            state.isError = true;
+            state.isSuccess =false;
+            state.message = action.error;
+            if(state.isError){
+                toast.error("Something Went Wrong");
+            }
+        })
+        .addCase(createAnOrder.pending,(state)=>{
+            state.isLoading = true;
+        })
+        .addCase(createAnOrder.fulfilled,(state,action)=>{
+            state.isLoading = false;
+            state.isError = false; 
+            state.isSuccess =true;
+            state.orderedProduct = action.payload;
+            if(state.isSuccess){
+                toast.success("Ordered Successfully");
+            }
+        })
+        .addCase(createAnOrder.rejected,(state,action)=>{
             state.isLoading = false;
             state.isError = true;
             state.isSuccess =false;
